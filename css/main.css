@@ -1,0 +1,49 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Staatliches', cursive;
+}
+
+h1 {
+    color: #f85d5d;
+    font-size: 50px;
+}
+
+#board {
+    display: grid;
+    grid-template-columns: repeat(3, 20vmin);
+    grid-template-rows: repeat(3, 20vmin);
+    gap: 1vmin;
+}
+
+#board div {
+    background: radial-gradient(#e66465, #9198e5);
+}
+
+#board div:hover {
+    background-color: transparent;
+    opacity: 0.5;
+}
+
+button {
+    margin-top: 30px;
+    padding: 15px;
+    background-color: #818aee;
+    color: white;
+    border-radius: 5px;
+    font-family: 'Staatliches', cursive;
+    font-size: 20px;
+  }
+  
+  button:hover {
+    opacity: 0.5;
+    font-style: italic;
+  }
