@@ -42,7 +42,7 @@ let turn; // 1 or -1 (player)
 let winner; // player that won (-1 or 1), a tie ('T'), or game in play (?)
 
 /*----- cached element references -----*/
-const sqEl = document.querySelectorAll('div');
+const sqEl = Array.from(document.querySelectorAll('div'));
 let gameBoard = document.getElementById('board')
 const msgEl = document.getElementById('msg');
 
@@ -59,49 +59,53 @@ function init() {
     turn = 1;
     winner = null;
     render();
-    turn();
 }
 
 function render() {
-    renderBoard();
+  winner = getWinner();  
+  console.log(winner)
+  renderBoard();
     if (winner) {
         if (winner === 'T') {
           msgEl.innerHTML = "It's a Tie!";
         } else {
-          msgEl.innerHTML = `<span ${playerLookup[winner]}">${playerLookup[winner].toUpperCase()}"</span> - WINNER WINNER CHICKEN DINNER!`;
+          msgEl.innerHTML = `"${playerLookup[winner]}"</span> - WINNER WINNER CHICKEN DINNER!`;
         }
       } else {
         // Show whose turn it currently is
-        msgEl.innerHTML = `<span ${playerLookup[turn]}">${playerLookup[turn].toUpperCase()}'s</span> Turn`;
+        msgEl.innerHTML = `"<span ${playerLookup[turn]}">${playerLookup[turn].toUpperCase()}"'s</span> Turn`;
       }
     };
 
 function renderBoard() {
-    board.forEach(function(cell) {
-        const div = document.getElementById();
+    board.forEach(function(cell, idx) {
+        const div = document.getElementById(`cell${idx}`);
         div.style.backgroundColor = playerLookup[cell]
     });
 }
+//textContent to change rather than background ^^
 
 function handleBoardClick(e) {
-    const square = sqEl.indexOf(e.target);
-    if (!square.includes(null)) return;
-    if (square === -1 || winner)
-    //apply the attribute of which ever player's turn it is
+  const idx = parseInt(e.target.id.slice(4));
+    if (e.target.textContent) return;
+    e.target.textContent = playerLookup[turn]
+    board[idx] = turn;
     turn *= -1;
-    if (winner = !null());
         render();
-    //do I need to splice the playerLookup propert to the array (to hold the "data")
   }
+  //check board[idx] rather than textContent
 
 function getWinner() {
-  for (let i = 0; i < board.length; i++) {
-    checkBoard(i);
-    if (winner) break;
+  console.log(board)
+  for (let i = 0; i < winPlay.length; i++) {
+  console.log(board[winPlay[i][0]])
+    if (Math.abs(board[winPlay[i][0]] + board[winPlay[i][1]] + board[winPlay[i][2]]) === 3) return board[winPlay[i][0]];
   }
+  if (board.includes(null)) return null;
+  return 'T';
 }
 
 function clearBoard(e) {
-///If a cell/square has a -1 or 1 value in it -> replace with 'null'
+  location.reload();
 }; 
 
