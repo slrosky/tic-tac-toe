@@ -69,7 +69,7 @@ function render() {
         if (winner === 'T') {
           msgEl.innerHTML = "It's a Tie!";
         } else {
-          msgEl.innerHTML = `${playerLookup[winner]} WINS! WINNER WINNER CHICKEN DINNER!`;
+          msgEl.innerHTML = `${playerLookup[winner].toUpperCase()} WINS!<br> WINNER WINNER CHICKEN DINNER!`;
         }
       } else {
         // Show whose turn it currently is
@@ -91,7 +91,7 @@ function handleBoardClick(e) {
     e.target.textContent = playerLookup[turn]
     board[idx] = turn;
     turn *= -1;
-        render();
+    render();
   }
   //check board[idx] rather than textContent
 
